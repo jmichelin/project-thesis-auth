@@ -37,3 +37,4 @@ require('./app/routes.js')(app, passport);
 // start app
 app.listen(port);
 console.log(ip.address() + ':' + port);
+console.log(ip.toString(new Buffer([127, 0, 0, 1])) + ':' + port);

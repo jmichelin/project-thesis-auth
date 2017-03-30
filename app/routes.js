@@ -8,13 +8,14 @@ module.exports = function(app, passport) {
   });
 
   app.get('/login', function(req, res) {
+    // console.log('+++ filename: routes.js functionName: app.get(/login) expected: req.flash actual: ', req);
     res.render('login.ejs', { message: req.flash('loginMessage') });
   });
 
   app.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/profile', // redirect to the secure profile section
-    failureRedirect : '/login', // redirect back to the signup page if there is an error
-    failureFlash : true // allow flash messages
+    successRedirect : '/profile',
+    failureRedirect : '/login',
+    failureFlash : false
   }));
 
   app.get('/signup', function(req, res) {
@@ -22,9 +23,9 @@ module.exports = function(app, passport) {
   });
 
   app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect : '/profile', // redirect to the secure profile section
-    failureRedirect : '/signup', // redirect back to the signup page if there is an error
-    failureFlash : true // allow flash messages
+    successRedirect : '/profile',
+    failureRedirect : '/signup',
+    failureFlash : true
   }));
 
   app.get('/profile', isLoggedIn, function(req, res) {
